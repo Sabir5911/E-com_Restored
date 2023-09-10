@@ -4,9 +4,11 @@ import { PRODUCTS } from "./SanityData";
 import Image from "next/image";
 import { urlForImage } from "../../../sanity/lib/image";
 import { useDispatch, useSelector } from "react-redux";
-
 import { Products, cartActions } from "../store/slice";
 import { RootState } from "../store/store";
+import { useRouter } from "next/navigation";
+import { auth } from "@clerk/nextjs";
+import { NewUser } from "../lib/drizzle";
 export default function ProductsCard({ Product }: { Product: PRODUCTS[] }) {
   const [Size, SetSize] = useState("L");
 
@@ -14,14 +16,16 @@ export default function ProductsCard({ Product }: { Product: PRODUCTS[] }) {
     SetSize(size);
   };
 
+  const { refresh } = useRouter();
   const handleColor = (Seleted_Size: string) =>
     Size === Seleted_Size
       ? "bg-slate-900 text-white"
       : "bg-slate-300 text-white";
 
-  const TotalAmount = useSelector(
+  const Totalamount: number = useSelector(
     (state: RootState) => state.cartSlice.TotalAmount
   );
+
   const [Quantity, setQuantity] = useState(1);
 
   const increment = () => {
@@ -46,6 +50,40 @@ export default function ProductsCard({ Product }: { Product: PRODUCTS[] }) {
 
   const handledata = (data: Products) => {
     dispath(cartActions.addProduct(data));
+  };
+
+  const handleapi = async () => {
+
+    const data= await fetch("/api", {
+      method: "POST",
+      body: JSON.stringify({
+        // Productid:Product[0]._id,
+        // image: urlForImage(Product[0].image[0]).url(),
+        // price: Product[0].price,
+        // name: Product[0].name,
+        // category: Product[0].category.name,
+        // quantity: Quantity,
+        // Type: Product[0].Type,
+        // size: Size,
+        // totalprice: Quantity * Product[0].price,
+        product_id: Product[0]._id,
+        product_name: Product[0].name,
+        quantity: Quantity,
+        product_image: urlForImage(Product[0].image[0]).url(),
+        product_type: Product[0].Type,
+        price:Product[0].price as number,
+
+        product_size: Size,
+
+
+      }),
+
+    });
+
+    const result = await data.json();
+    console.log(result+'daygyagdyad');
+    
+    refresh();
   };
 
   return (
@@ -136,7 +174,10 @@ export default function ProductsCard({ Product }: { Product: PRODUCTS[] }) {
                     +
                   </button>
                 </div>
-                <div className="mt-7 flex gap-x-10  float-left lg:float-none">
+                <div
+                  className="mt-7 flex gap-x-10  float-left lg:float-none"
+                  onClick={handleapi}
+                >
                   <button
                     className="bg-blue-100 text-[#0000ff] px-4 py-3 rounded-md hover:shadow-xl font-semibold  text-base  "
                     onClick={() =>
@@ -147,7 +188,7 @@ export default function ProductsCard({ Product }: { Product: PRODUCTS[] }) {
                         name: Product[0].name,
                         price: Product[0].price,
                         quantity: Quantity,
-                        totalprice: TotalAmount,
+                        totalprice: Totalamount,
                         Type: Product[0].Type,
                         size: Size,
                       })

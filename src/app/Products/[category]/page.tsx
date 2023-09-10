@@ -34,9 +34,7 @@ export default async function page({
                   </div>
                   <div className="p-1">
                     <div className="font-bold">{items.Type}</div>
-                    <div className="text-slate-400 font-bold">
-                      {items.name}
-                    </div>
+                    <div className="text-slate-400 font-bold">{items.name}</div>
                     <div className="font-bold">PKR {items.price}</div>
                   </div>
                 </Link>
@@ -67,9 +65,7 @@ export default async function page({
               </div>
               <div className="p-1">
                 <div className="font-bold">{items.Type}</div>
-                <div className="text-slate-400 font-bold">
-                  {items.name}
-                </div>
+                <div className="text-slate-400 font-bold">{items.name}</div>
                 <div className="font-bold">PKR {items.price}</div>
               </div>
             </Link>

@@ -1,74 +1,60 @@
-// import { NextRequest, NextResponse } from "next/server";
-// import * as jose from "jose";
-// import { cookies } from "next/headers";
 
-// export const POST = async (request: NextRequest) => {
-//   const body = await request.json().catch(() => null);
+import { auth } from "@clerk/nextjs";
 
-//   if (body.email === "admin" && body.password === "admin") {
-//     const secret = new TextEncoder().encode(
-//       process.env.JWT_SECRET
-//     );
-
-//     console.log("secret: ", secret);  
-//     const alg = "HS256";
-
-//     const jwt = await new jose.SignJWT({ email: body.email })
-//       .setProtectedHeader({ alg })
-//       .setIssuedAt()
-//       .setExpirationTime("2h")
-//       .sign(secret);
-
-//     cookies().set("token", jwt, {
-//       httpOnly: true,
-//     });
-//     console.log();
-    
-
-
-
-//     return NextResponse.json({ message: "Login success" });
-//   }
-
-//   return NextResponse.json({ message: "Invalid Email or password" });
-// };
-
-
+import { db, userdetails } from "../lib/drizzle";
 import { NextRequest, NextResponse } from "next/server";
-import * as jose from "jose";
-import { cookies } from "next/headers";
+
+export const GET = async () => {
+
+  try {
+    const res = await db.select().from(userdetails)
+    //Converting circular structure to JSON
+    // --> starting at object with constructor 'PgTable'
+    // |     property 'task1' -> object with constructor 'PgVarchar'
+    // --- property 'table' closes the circle   error resolved (await) 
+    return NextResponse.json(res)
+
+  } catch (error) {
+    console.log((error as { message: string }).message);
+    return NextResponse.json({
+      message: (error as { message: string }).message,
+    });
+  }
+}
 
 export const POST = async (request: NextRequest) => {
-  const body = await request.json().catch(() => null);
 
-  if (body.email === "admin" && body.password === "admin") {
-    const secret = new TextEncoder().encode(
-      process.env.JWT_SECRET
-    );
+  const res = await request.json()
 
-    console.log("secret: ", secret);  
-    const alg = "HS256";
+  const { userId } = auth()
 
-    const jwt = await new jose.SignJWT({ email: body.email })
-      .setProtectedHeader({ alg })
-      .setIssuedAt()
-      .setExpirationTime("2h")
-      .sign(secret);
+  try {
+    const req = await db.insert(userdetails).values({
+      product_id: res.product_id,
+      product_name: res.product_name,
+      quantity: res.quantity,
+      user_id: userId as string,
+      product_image: res.product_image,
+      product_type: res.product_type,
+      product_size: res.product_size,
+    price: res.price ,
 
-    // cookies().set("token", jwt, {
-    //   httpOnly: true,
-    // });
-    // console.log();
-    
-    cookies().set("token", jwt, {
 
+    }).returning()
+
+    return NextResponse.json(req)
+  } catch (error) {
+    console.log((error as { message: string }).message);
+    return NextResponse.json({
+      message: (error as { message: string }).message,
     });
-    console.log();
-
-
-
-    return NextResponse.json({ message: "Login success" });
   }
+}
 
-  return NextResponse.json({ message: "Invalid Email or password" });
-};
+
+
+
+
+
+
+

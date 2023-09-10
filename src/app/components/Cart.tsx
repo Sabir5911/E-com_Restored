@@ -1,13 +1,22 @@
+//@ts-nocheck
 "use client";
 import { Products, cartActions } from "../store/slice";
 import { useDispatch, useSelector } from "react-redux";
 import { AiOutlineDelete } from "react-icons/ai";
 import { RootState } from "../store/store";
 import Image from "next/image";
-export default function Cart() {
+import { IUser } from "../lib/model/schema";
+import {useRouter}  from "next/navigation";
+import { urlForImage } from "../../../sanity/lib/image";
+import { NewUser } from "../lib/drizzle";
+
+export default function Cart({filter}:{filter:NewUser[]}) {
+
+
+
   const data: Products[] = useSelector(
     (state: RootState) => state.cartSlice.items
-  );
+  );     
 
   const quantity: number = useSelector(
     (state: RootState) => state.cartSlice.quantity
@@ -17,24 +26,17 @@ export default function Cart() {
     (state: RootState) => state.cartSlice.TotalAmount
   );
 
-  const dispatch=useDispatch()
-// const handleDelete=()=>{
-//     dispatch(cartActions.)
-
-// }
-
-
   return (
     <>
       <div className="flex   justify-start    flex-wrap mt-32">
         <div>
-          {data.map((elm, i = 0) => (
+          {filter.map((elm, i) => (
             <div
               className="flex gap-x-10 p-2 justify-around flex-wrap flex-1		"
-              key={i + 1}
+              key={i }
             >
               <Image
-                src={`${elm.image}`}
+                src={`${elm.product_image}`}
                 width={120}
                 height={120}
                 alt="sa"
@@ -43,11 +45,11 @@ export default function Cart() {
               <div className="flex  flex-col flex-wrap   justify-center  ">
                 <div className="text-xs flex gap lg:text-lg  font-bold ">
                   {" "}
-                  {elm.name}
+                  {elm.product_name}
                 </div>
                 <div className="text-xs text-[#94A3B8] font-bold ">
                   {" "}
-                  {elm.Type}
+                  {elm.product_type}
                 </div>
                 <div className="text-xs font-bold"> {elm.price}$</div>
 
@@ -67,7 +69,7 @@ export default function Cart() {
                     </div>
                     <div className="text-xs font-sans font-semibold ">
                       {" "}
-                      Size :{elm.size}
+                      Size :{elm.product_size}
                     </div>
                   </div>
                 </div>

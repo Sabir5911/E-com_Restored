@@ -1,9 +1,8 @@
-
+import Image from 'next/image';
 
 import React from 'react'
 import { GEtSanitydata, PRODUCTS } from './SanityData'
 import Link from 'next/link';
-import { Image } from 'next/dist/client/image-component';
 import { urlForImage } from '../../../sanity/lib/image';
 export default async function Hero2() {
 
