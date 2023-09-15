@@ -1,11 +1,9 @@
-//@ts-nocheck
 "use client";
 import { Products, cartActions } from "../store/slice";
 import { useDispatch, useSelector } from "react-redux";
 import { AiOutlineDelete } from "react-icons/ai";
 import { RootState } from "../store/store";
 import Image from "next/image";
-import { IUser } from "../lib/model/schema";
 import {useRouter}  from "next/navigation";
 import { urlForImage } from "../../../sanity/lib/image";
 import { NewUser } from "../lib/drizzle";
@@ -13,7 +11,7 @@ import { NewUser } from "../lib/drizzle";
 export default function Cart({filter}:{filter:NewUser[]}) {
 
 
-
+const {refresh}=useRouter()
   const data: Products[] = useSelector(
     (state: RootState) => state.cartSlice.items
   );     
@@ -24,8 +22,21 @@ export default function Cart({filter}:{filter:NewUser[]}) {
 
   const Totalamount: number = useSelector(
     (state: RootState) => state.cartSlice.TotalAmount
-  );
+    );
 
+
+    const handleDelete= async (id:number)=>{
+      const res=await fetch(`/api/?id=${id}`,{
+        method:"DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+      })
+refresh()
+
+
+    }
   return (
     <>
       <div className="flex   justify-start    flex-wrap mt-32">
@@ -75,7 +86,7 @@ export default function Cart({filter}:{filter:NewUser[]}) {
                 </div>
               </div>
               <div className="float right my-auto ">
-                <button>
+                <button onClick={()=>handleDelete(elm.id as number)}>
                   {" "}
                   <AiOutlineDelete size={15} />
                 </button>

@@ -1,6 +1,6 @@
 
 import { auth } from "@clerk/nextjs";
-
+import { and, eq } from "drizzle-orm";
 import { db, userdetails } from "../lib/drizzle";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -52,9 +52,64 @@ export const POST = async (request: NextRequest) => {
 }
 
 
+export const DELETE=async (request:NextRequest)=>{
+
+  const product_id=request.nextUrl.searchParams
+try{
+
+  if(product_id.has('id')){
+    let daata=await db.delete(userdetails).where(eq(userdetails.id,product_id.get('id') as unknown as number)).returning()
+}
+}  catch (error) {
+    console.log((error as { message: string }).message);
+    return NextResponse.json({
+      message: (error as { message: string }).message,
+    });
+  }
+}
 
 
 
 
+
+
+
+
+// export const PUT=async (request:NextRequest)=>{
+
+//   const res=await request.json();
+//   const product_id=request.nextUrl.searchParams
+
+//     let daata=await db.update(userdetails).set({quantity:res.quantity}).where(
+
+//      eq(userdetails.id,product_id.get('id') as unknown as number )
+//     ).returning()
+
+
+// }
+
+
+
+
+
+
+
+
+export const PUT=async (request:NextRequest)=>{
+
+const res=await request.json()
+  const product_id=request.nextUrl.searchParams
+try{
+
+  if(product_id.has('id')){
+    let daata=await db.update(userdetails).set({quantity:res.quantity}).where(eq(userdetails.id,res.id) as unknown as any).returning()
+}
+}  catch (error) {
+    console.log((error as { message: string }).message);
+    return NextResponse.json({
+      message: (error as { message: string }).message,
+    });
+  }
+}
 
 

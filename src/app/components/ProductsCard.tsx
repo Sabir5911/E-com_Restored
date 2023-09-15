@@ -57,15 +57,7 @@ export default function ProductsCard({ Product }: { Product: PRODUCTS[] }) {
     const data= await fetch("/api", {
       method: "POST",
       body: JSON.stringify({
-        // Productid:Product[0]._id,
-        // image: urlForImage(Product[0].image[0]).url(),
-        // price: Product[0].price,
-        // name: Product[0].name,
-        // category: Product[0].category.name,
-        // quantity: Quantity,
-        // Type: Product[0].Type,
-        // size: Size,
-        // totalprice: Quantity * Product[0].price,
+
         product_id: Product[0]._id,
         product_name: Product[0].name,
         quantity: Quantity,
@@ -81,10 +73,27 @@ export default function ProductsCard({ Product }: { Product: PRODUCTS[] }) {
     });
 
     const result = await data.json();
-    console.log(result+'daygyagdyad');
     
     refresh();
   };
+
+  const handleUpdate = async (datas:any) => {
+
+    const data= await fetch("/api", {
+      method: "PUT",
+      body: JSON.stringify({
+
+        datas
+      
+
+      }),
+
+    });
+
+    // const result = await data.json();
+    
+  };
+
 
   return (
     <>
@@ -176,21 +185,26 @@ export default function ProductsCard({ Product }: { Product: PRODUCTS[] }) {
                 </div>
                 <div
                   className="mt-7 flex gap-x-10  float-left lg:float-none"
-                  onClick={handleapi}
+                  // onClick={handleapi}
                 >
                   <button
                     className="bg-blue-100 text-[#0000ff] px-4 py-3 rounded-md hover:shadow-xl font-semibold  text-base  "
                     onClick={() =>
-                      handledata({
-                        _id: Product[0]._id,
-                        category: Product[0].category.name,
-                        image: urlForImage(Product[0].image[0]).url(),
-                        name: Product[0].name,
-                        price: Product[0].price,
+                      // handledata({
+                      //   _id: Product[0]._id,
+                      //   category: Product[0].category.name,
+                      //   image: urlForImage(Product[0].image[0]).url(),
+                      //   name: Product[0].name,
+                      //   price: Product[0].price,
+                      //   quantity: Quantity,
+                      //   totalprice: Totalamount,
+                      //   Type: Product[0].Type,
+                      //   size: Size,
+                      // })
+                      handleUpdate({
+                        product_name: Product[0].name,
                         quantity: Quantity,
-                        totalprice: Totalamount,
-                        Type: Product[0].Type,
-                        size: Size,
+                        product_id:elm._id,
                       })
                     }
                   >
