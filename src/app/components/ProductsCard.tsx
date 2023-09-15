@@ -185,27 +185,23 @@ export default function ProductsCard({ Product }: { Product: PRODUCTS[] }) {
                 </div>
                 <div
                   className="mt-7 flex gap-x-10  float-left lg:float-none"
-                  // onClick={handleapi}
+                  onClick={handleapi}
                 >
                   <button
                     className="bg-blue-100 text-[#0000ff] px-4 py-3 rounded-md hover:shadow-xl font-semibold  text-base  "
                     onClick={() =>
-                      // handledata({
-                      //   _id: Product[0]._id,
-                      //   category: Product[0].category.name,
-                      //   image: urlForImage(Product[0].image[0]).url(),
-                      //   name: Product[0].name,
-                      //   price: Product[0].price,
-                      //   quantity: Quantity,
-                      //   totalprice: Totalamount,
-                      //   Type: Product[0].Type,
-                      //   size: Size,
-                      // })
-                      handleUpdate({
-                        product_name: Product[0].name,
+                      handledata({
+                        _id: Product[0]._id,
+                        category: Product[0].category.name,
+                        image: urlForImage(Product[0].image[0]).url(),
+                        name: Product[0].name,
+                        price: Product[0].price,
                         quantity: Quantity,
-                        product_id:elm._id,
+                        totalprice: Totalamount,
+                        Type: Product[0].Type,
+                        size: Size,
                       })
+                    
                     }
                   >
                     ADD TO CART
