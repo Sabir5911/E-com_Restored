@@ -1,10 +1,11 @@
 import { SignUp } from "@clerk/nextjs";
  
 export default function Page() {
-  return<>
-  <div className="flex justify-center items-center mt-20">
-  <SignUp afterSignUpUrl={'/'} />
+  return <>
+<div className="justify-center items-center flex">
+<SignUp />;
 
-  </div>
+    </div>  
+  
   </>
 }

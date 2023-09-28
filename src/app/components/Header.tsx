@@ -6,7 +6,6 @@ import serch from "../../../public/assets/serch.png";
 
 import logo from "../../../public/assets/Logo.jpg";
 
-import shop from "../../../public/assets/shop.png";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
 import { UserButton } from "@clerk/nextjs";

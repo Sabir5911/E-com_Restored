@@ -1,9 +1,8 @@
 
-import { auth } from "@clerk/nextjs";
 import { and, eq } from "drizzle-orm";
 import { db, userdetails } from "../lib/drizzle";
 import { NextRequest, NextResponse } from "next/server";
-
+import { auth } from "@clerk/nextjs";
 export const GET = async () => {
 
   try {
@@ -27,6 +26,8 @@ export const POST = async (request: NextRequest) => {
   const res = await request.json()
 
   const { userId } = auth()
+ 
+
 
   try {
     const req = await db.insert(userdetails).values({
@@ -112,4 +113,8 @@ try{
   }
 }
 
+
+function v4() {
+  throw new Error("Function not implemented.");
+}
 

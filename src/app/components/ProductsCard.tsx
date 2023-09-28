@@ -7,8 +7,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Products, cartActions } from "../store/slice";
 import { RootState } from "../store/store";
 import { useRouter } from "next/navigation";
-import { auth } from "@clerk/nextjs";
-import { NewUser } from "../lib/drizzle";
 export default function ProductsCard({ Product }: { Product: PRODUCTS[] }) {
   const [Size, SetSize] = useState("L");
 
@@ -75,23 +73,6 @@ export default function ProductsCard({ Product }: { Product: PRODUCTS[] }) {
     const result = await data.json();
     
     refresh();
-  };
-
-  const handleUpdate = async (datas:any) => {
-
-    const data= await fetch("/api", {
-      method: "PUT",
-      body: JSON.stringify({
-
-        datas
-      
-
-      }),
-
-    });
-
-    // const result = await data.json();
-    
   };
 
 
