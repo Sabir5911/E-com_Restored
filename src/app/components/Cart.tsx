@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { AiOutlineDelete } from "react-icons/ai";
 import { RootState } from "../store/store";
 import Image from "next/image";
-import {useRouter}  from "next/navigation";
 import { NewUser } from "../lib/drizzle";
 
 export default function Cart({filter}:{filter:NewUser[]}) {
