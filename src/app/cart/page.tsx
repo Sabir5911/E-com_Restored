@@ -44,7 +44,7 @@ export default async function page() {
 
                   
   return (
-    <Cart   data={cartdata}/>
+    <Cart  />
   
   )
 }

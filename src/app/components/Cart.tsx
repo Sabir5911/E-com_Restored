@@ -8,12 +8,12 @@ import Image from "next/image";
 import { NewUser, User } from "../lib/drizzle";
 import { useRouter } from "next/navigation";
 
-export default function Cart({data}:{data}) {
+export default function Cart() {
 
 
-  // const data: Products[] = useSelector(
-  //   (state: RootState) => state.cartSlice.items
-  // );     
+  const data: Products[] = useSelector(
+    (state: RootState) => state.cartSlice.items
+  );     
 
   const quantity: number = useSelector(
     (state: RootState) => state.cartSlice.quantity
@@ -46,7 +46,7 @@ refresh();
               key={i }
             >
               <Image
-                src={`${elm.product_image}`}
+                src={`${elm.image}`}
                 width={120}
                 height={120}
                 alt="sa"
@@ -55,11 +55,11 @@ refresh();
               <div className="flex  flex-col flex-wrap   justify-center  ">
                 <div className="text-xs flex gap lg:text-lg  font-bold ">
                   {" "}
-                  {elm.product_name}
+                  {elm.name}
                 </div>
                 <div className="text-xs text-[#94A3B8] font-bold ">
                   {" "}
-                  {elm.product_type}
+                  {elm.Type}
                 </div>
                 <div className="text-xs font-bold"> {elm.price}$</div>
 
@@ -79,7 +79,7 @@ refresh();
                     </div>
                     <div className="text-xs font-sans font-semibold ">
                       {" "}
-                      Size :{elm.product_size}
+                      Size :{elm.size}
                     </div>
                   </div>
                 </div>

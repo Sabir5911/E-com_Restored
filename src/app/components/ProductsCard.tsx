@@ -50,34 +50,34 @@ export default function ProductsCard({ Product }: { Product: PRODUCTS[] }) {
     dispath(cartActions.addProduct(data));
   };
 
-  const handleapi = async () => {
+  // const handleapi = async () => {
 
-    const data= await fetch("/api", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify({
+  //   const data= await fetch("/api", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-type": "application/json",
+  //     },
+  //     body: JSON.stringify({
 
-        product_id: Product[0]._id,
-        product_name: Product[0].name,
-        quantity: Quantity,
-        product_image: urlForImage(Product[0].image[0]).url(),
-        product_type: Product[0].Type,
-        price:Product[0].price as number,
+  //       product_id: Product[0]._id,
+  //       product_name: Product[0].name,
+  //       quantity: Quantity,
+  //       product_image: urlForImage(Product[0].image[0]).url(),
+  //       product_type: Product[0].Type,
+  //       price:Product[0].price as number,
 
-        product_size: Size,
+  //       product_size: Size,
 
 
-      }),
+  //     }),
 
-    });
+  //   });
 
-    const result = await data.json();
+  //   const result = await data.json();
     
-    refresh();
-  };
-
+  //   
+  // };
+  refresh();
 
   return (
     <>
@@ -169,7 +169,7 @@ export default function ProductsCard({ Product }: { Product: PRODUCTS[] }) {
                 </div>
                 <div
                   className="mt-7 flex gap-x-10  float-left lg:float-none"
-                  onClick={handleapi}
+                  // onClick={handleapi}
                 >
                   <button
                     className="bg-blue-100 text-[#0000ff] px-4 py-3 rounded-md hover:shadow-xl font-semibold  text-base  "
