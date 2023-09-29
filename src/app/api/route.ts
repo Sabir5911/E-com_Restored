@@ -114,7 +114,3 @@ try{
 }
 
 
-function v4() {
-  throw new Error("Function not implemented.");
-}
-
