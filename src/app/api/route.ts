@@ -46,7 +46,7 @@ export const POST = async (request: NextRequest) => {
       product_id: res.product_id,
       product_name: res.product_name,
       quantity: res.quantity,
-      user_id: cookies().get('user_id')?.value,
+      user_id: cookies().get('user_id')?.value as string,
       product_image: res.product_image,
       product_type: res.product_type,
       product_size: res.product_size,
