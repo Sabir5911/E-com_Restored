@@ -3,6 +3,9 @@ import { and, eq } from "drizzle-orm";
 import { db, userdetails } from "../lib/drizzle";
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs";
+import { v4 } from "uuid"
+
+import { cookies } from "next/dist/client/components/headers";
 export const GET = async () => {
 
   try {
@@ -25,7 +28,16 @@ export const POST = async (request: NextRequest) => {
 
   const res = await request.json()
 
-  const { userId } = auth()
+  // const { userId } = auth()
+  const idgenerate = v4()
+    const setcookey = cookies()
+
+
+    if (!cookies().get('user_id')?.value) {
+
+        setcookey.set('user_id', idgenerate)
+
+    }
  
 
 
@@ -34,7 +46,7 @@ export const POST = async (request: NextRequest) => {
       product_id: res.product_id,
       product_name: res.product_name,
       quantity: res.quantity,
-      user_id: userId as string,
+      user_id: cookies().get('user_id')?.value,
       product_image: res.product_image,
       product_type: res.product_type,
       product_size: res.product_size,

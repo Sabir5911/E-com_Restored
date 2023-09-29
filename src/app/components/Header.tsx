@@ -64,7 +64,7 @@ export default function Header() {
               placeholder="What are you looking for"
             />
           </div>
-          <UserButton afterSignOutUrl="/"/>
+          {/* <UserButton afterSignOutUrl="/"/> */}
 
           <div className="flex  items-center justify-center gap-3">
             <div className="hidden lg:flex"></div>
