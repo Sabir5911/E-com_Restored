@@ -54,6 +54,9 @@ export default function ProductsCard({ Product }: { Product: PRODUCTS[] }) {
 
     const data= await fetch("/api", {
       method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
       body: JSON.stringify({
 
         product_id: Product[0]._id,

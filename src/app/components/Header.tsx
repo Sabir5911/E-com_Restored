@@ -8,7 +8,6 @@ import logo from "../../../public/assets/Logo.jpg";
 
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
-import { UserButton } from "@clerk/nextjs";
 
 export default function Header() {
   let data = [

@@ -1,18 +1,19 @@
+//@ts-nocheck
 "use client";
 import { Products } from "../store/slice";
 import { useDispatch, useSelector } from "react-redux";
 import { AiOutlineDelete } from "react-icons/ai";
 import { RootState } from "../store/store";
 import Image from "next/image";
-import { NewUser } from "../lib/drizzle";
+import { NewUser, User } from "../lib/drizzle";
 import { useRouter } from "next/navigation";
 
-export default function Cart({filter}:{filter:NewUser[]}) {
+export default function Cart({data}:{data}) {
 
 
-  const data: Products[] = useSelector(
-    (state: RootState) => state.cartSlice.items
-  );     
+  // const data: Products[] = useSelector(
+  //   (state: RootState) => state.cartSlice.items
+  // );     
 
   const quantity: number = useSelector(
     (state: RootState) => state.cartSlice.quantity
@@ -39,7 +40,7 @@ refresh();
     <>
       <div className="flex   justify-start    flex-wrap mt-32">
         <div>
-          {filter.map((elm, i) => (
+          {data.map((elm, i) => (
             <div
               className="flex gap-x-10 p-2 justify-around flex-wrap flex-1		"
               key={i }

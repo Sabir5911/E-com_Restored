@@ -1,11 +1,10 @@
 
-import { and, eq } from "drizzle-orm";
 import { db, userdetails } from "../lib/drizzle";
 import { NextRequest, NextResponse } from "next/server";
-import { auth } from "@clerk/nextjs";
 import { v4 } from "uuid"
 
 import { cookies } from "next/dist/client/components/headers";
+import { eq } from "drizzle-orm";
 export const GET = async () => {
 
   try {
@@ -80,31 +79,6 @@ try{
     });
   }
 }
-
-
-
-
-
-
-
-
-// export const PUT=async (request:NextRequest)=>{
-
-//   const res=await request.json();
-//   const product_id=request.nextUrl.searchParams
-
-//     let daata=await db.update(userdetails).set({quantity:res.quantity}).where(
-
-//      eq(userdetails.id,product_id.get('id') as unknown as number )
-//     ).returning()
-
-
-// }
-
-
-
-
-
 
 
 

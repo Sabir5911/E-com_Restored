@@ -1,6 +1,6 @@
 import { drizzle } from 'drizzle-orm/vercel-postgres';
 import { integer,  pgTable,  serial, varchar } from 'drizzle-orm/pg-core';
-import { InferSelectModel, InferInsertModel } from 'drizzle-orm'
+import { InferSelectModel, InferInsertModel, InferModel } from 'drizzle-orm'
 import { sql } from '@vercel/postgres';
 
 export const userdetails = pgTable("cartdetails", {
