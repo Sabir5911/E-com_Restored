@@ -12,7 +12,7 @@ const BASE_URL =
  async function GetData() {
     
     try {
-        const res = await fetch(`${BASE_URL}/api`, {
+        const res = await fetch(`http://localhost:3000/api`, {
           headers: {
             "Content-type": "application/json",
           },
