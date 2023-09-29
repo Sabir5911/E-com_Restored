@@ -20,9 +20,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
+    <ClerkProvider>
+
     <html lang="en">
       <body className={inter.className}>
-        <ClerkProvider>
 
         <Wrapper>
           <Providers>
@@ -31,9 +32,10 @@ export default function RootLayout({
           </Providers>
           <Footer />
         </Wrapper>
-        </ClerkProvider>
 
       </body>
     </html>
+    </ClerkProvider>
+
   );
 }
