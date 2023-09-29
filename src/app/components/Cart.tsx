@@ -5,6 +5,7 @@ import { AiOutlineDelete } from "react-icons/ai";
 import { RootState } from "../store/store";
 import Image from "next/image";
 import { NewUser } from "../lib/drizzle";
+import { useRouter } from "next/navigation";
 
 export default function Cart({filter}:{filter:NewUser[]}) {
 
@@ -21,7 +22,7 @@ export default function Cart({filter}:{filter:NewUser[]}) {
     (state: RootState) => state.cartSlice.TotalAmount
     );
 
-
+    const { refresh } = useRouter();
     const handleDelete= async (id:number)=>{
 
 const res=await fetch(`/api/?id=${id}`,{
@@ -31,7 +32,7 @@ const res=await fetch(`/api/?id=${id}`,{
         },
 
       })
-
+refresh();
 
     }
   return (

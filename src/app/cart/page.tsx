@@ -14,7 +14,7 @@ const { userId } = auth()
 
 const filter=data .filter((elm)=>elm.user_id===userId)
 
-console.log(filter);
+console.log(filter,'data a raha from filter');
 
                             
   return (
