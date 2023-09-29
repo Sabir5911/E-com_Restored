@@ -6,7 +6,8 @@ import { cookies } from 'next/dist/client/components/headers';
 const BASE_URL =
   process.env.NODE_ENV == "development"
     ? "http://localhost:3000"
-    : "https://e-com-restored-22gur4m2l-sabirali786692-gmailcom.vercel.app";
+    : "e-com-restored.vercel.app";
+   ;
 
  async function GetData() {
     
