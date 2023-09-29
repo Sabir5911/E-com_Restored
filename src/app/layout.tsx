@@ -5,6 +5,7 @@ import Providers from "./store/Providers";
 import { Inter } from "next/font/google";
 import Wrapper from "./shared/Wrapper";
 import Footer from "./components/Footer";
+import { ClerkProvider } from "@clerk/nextjs";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    // <ClerkProvider>
+    <ClerkProvider>
 
     <html lang="en">
       <body className={inter.className}>
@@ -34,7 +35,7 @@ export default function RootLayout({
 
       </body>
     </html>
-    // </ClerkProvider>
+    </ClerkProvider>
 
   );
 }

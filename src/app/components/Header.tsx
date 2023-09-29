@@ -8,6 +8,7 @@ import logo from "../../../public/assets/Logo.jpg";
 
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
+import { UserButton } from "@clerk/nextjs";
 
 export default function Header() {
   let data = [
@@ -63,7 +64,7 @@ export default function Header() {
               placeholder="What are you looking for"
             />
           </div>
-          {/* <UserButton afterSignOutUrl="/"/> */}
+          <UserButton afterSignOutUrl="/"/>
 
           <div className="flex  items-center justify-center gap-3">
             <div className="hidden lg:flex"></div>
