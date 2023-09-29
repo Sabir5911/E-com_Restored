@@ -9,10 +9,12 @@ export default async function page() {
         
 
   const data:NewUser[]=await GetData()
+  console.log(data);
+  
 
-const { userId } = auth()
+const { userId :user_id } = auth()
 
-const filter=data .filter((elm)=>elm.user_id===userId)
+const filter=data.filter((elm)=>elm.user_id===user_id as string)
 
 console.log(filter,'data a raha from filter');
 
